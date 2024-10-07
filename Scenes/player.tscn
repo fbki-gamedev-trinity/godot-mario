@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx0hi07h1wp72"]
+
+[ext_resource type="Texture2D" uid="uid://w7d0blnepycc" path="res://Assets/MarioStanding.png" id="1_dvau2"]
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_go7iq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jpcuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dvau2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tan6q"]
+size = Vector2(12, 16)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_go7iq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jpcuh")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tan6q")
