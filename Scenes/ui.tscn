@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd7piesrsld2t"]
+
+[ext_resource type="Script" path="res://Scenes/ui.gd" id="1_veov8"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_veov8")
+
+[node name="Lives" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

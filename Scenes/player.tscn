@@ -1,7 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx0hi07h1wp72"]
+[gd_scene load_steps=13 format=3 uid="uid://cx0hi07h1wp72"]
 
 [ext_resource type="Texture2D" uid="uid://w7d0blnepycc" path="res://Assets/MarioStanding.png" id="1_dvau2"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_go7iq"]
+[ext_resource type="Texture2D" uid="uid://b5spjuqhkwsw6" path="res://Assets/smb_mario_sheet.png" id="3_pfsbn"]
+[ext_resource type="Script" path="res://Scenes/animated_sprite_2d.gd" id="4_kwuoh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcx08"]
+atlas = ExtResource("3_pfsbn")
+region = Rect2(359, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a6uq"]
+atlas = ExtResource("3_pfsbn")
+region = Rect2(300, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw24r"]
+atlas = ExtResource("3_pfsbn")
+region = Rect2(270, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qudrc"]
+atlas = ExtResource("3_pfsbn")
+region = Rect2(240, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sffeg"]
+atlas = ExtResource("3_pfsbn")
+region = Rect2(330, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jpcuh"]
 animations = [{
@@ -12,17 +34,61 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcx08")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a6uq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw24r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qudrc")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sffeg")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tan6q"]
+size = Vector2(7, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umbfy"]
 size = Vector2(12, 16)
 
 [node name="player" type="CharacterBody2D"]
+collision_mask = 6
 script = ExtResource("1_go7iq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jpcuh")
 animation = &"idle"
+script = ExtResource("4_kwuoh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_tan6q")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_umbfy")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
