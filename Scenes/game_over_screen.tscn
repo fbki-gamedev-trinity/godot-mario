@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://hnd2hrgnlscy"]
+
+[ext_resource type="Script" path="res://Scenes/game_over_screen.gd" id="1_wm1ia"]
+
+[node name="Node" type="Node2D"]
+script = ExtResource("1_wm1ia")
+
+[node name="Restart" type="Button" parent="."]
+offset_left = -40.0
+offset_top = -16.0
+offset_right = 40.0
+offset_bottom = 15.0
+text = "Рестарт"
+
+[node name="Quete" type="Button" parent="."]
+offset_left = -32.0
+offset_top = 24.0
+offset_right = 32.0
+offset_bottom = 55.0
+text = "Выход"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Quete" to="." method="_on_quete_pressed"]
