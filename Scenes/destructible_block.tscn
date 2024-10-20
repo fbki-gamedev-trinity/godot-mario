@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpc6hvxctyq86"]
+
+[ext_resource type="Texture2D" uid="uid://dsataukbdgpym" path="res://Assets/NES - Super Mario Bros - Tileset.png" id="1_hkmo5"]
+[ext_resource type="Script" path="res://Scenes/destructible_block.gd" id="1_veg0d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx7f5"]
+atlas = ExtResource("1_hkmo5")
+region = Rect2(51, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls5s8"]
+atlas = ExtResource("1_hkmo5")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pupm3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx7f5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ls5s8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3254n"]
+size = Vector2(16, 16)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_veg0d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pupm3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3254n")
