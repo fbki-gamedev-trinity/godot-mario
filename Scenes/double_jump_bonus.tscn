@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1vgfxhycudua"]
+
+[ext_resource type="Script" path="res://Scenes/double_jump_bonus.gd" id="1_cuf8h"]
+[ext_resource type="Texture2D" uid="uid://d3p2bx3wvvpwb" path="res://Assets/NES - Super Mario Bros - Items Objects and NPCs.png" id="2_h4vaj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i841d"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hauhx"]
+atlas = ExtResource("2_h4vaj")
+region = Rect2(106, 8, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwrcb"]
+atlas = ExtResource("2_h4vaj")
+region = Rect2(124, 8, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uaxh4"]
+animations = [{
+"frames": [{
+"duration": 2.1,
+"texture": SubResource("AtlasTexture_hauhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwrcb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="StaticBody2D" type="Area2D"]
+script = ExtResource("1_cuf8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i841d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uaxh4")
+autoplay = "default"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
